@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import pro.handler.file.vo.v1.UploadFileResponseVO;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -51,5 +52,6 @@ public class User {
     private LocalDateTime updated_at;
 
     public User() {
+
     }
 }
