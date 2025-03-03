@@ -1,14 +1,16 @@
 package com.ecomeerce.rest_api.models;
 
 import com.ecomeerce.rest_api.roles.UserRole;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.sql.Date;
-
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name="tab_user")
 public class User extends DataBaseModel {
@@ -23,7 +25,7 @@ public class User extends DataBaseModel {
     private Integer phone;
 
     @Column(nullable = false)
-    private Date birth;
+    private LocalDate birth;
 
     @Column(length = 50,nullable = false, unique = true)
     private String email;
@@ -34,6 +36,10 @@ public class User extends DataBaseModel {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Address> addresses = new HashSet<>();
 
     public User() {
 

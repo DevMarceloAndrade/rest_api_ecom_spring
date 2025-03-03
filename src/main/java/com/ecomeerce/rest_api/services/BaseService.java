@@ -2,10 +2,10 @@ package com.ecomeerce.rest_api.services;
 import com.ecomeerce.rest_api.exception.EntityDoesNotExist;
 import com.ecomeerce.rest_api.exception.InvalidEntityException;
 import com.ecomeerce.rest_api.repositories.DataBaseRepository;
-import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.UUID;
@@ -25,6 +25,7 @@ public class BaseService<T> {
         if(!dataBaseRepository.existsById(id)){
             throw new EntityDoesNotExist();
         }
+
     }
 
     private void validateEntity(T entity) {
@@ -40,7 +41,7 @@ public class BaseService<T> {
         return dataBaseRepository.save(entity);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public T getById(UUID id){
         return dataBaseRepository.findById(id)
                 .orElseThrow(EntityDoesNotExist::new);
@@ -59,5 +60,5 @@ public class BaseService<T> {
         dataBaseRepository.deleteById(id);
         return "Successfully deleted";
     }
-    
+
 }
