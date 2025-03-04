@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 @Data
 @Entity
 public class Product extends DataBaseModel {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @Column(nullable = false, length = 100)
     private String name;
