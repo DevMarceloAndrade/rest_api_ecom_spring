@@ -4,13 +4,11 @@ import com.ecomeerce.rest_api.exception.InvalidEntityException;
 import com.ecomeerce.rest_api.repositories.DataBaseRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.UUID;
 
-@Service
 public class BaseService<T> {
 
     private final DataBaseRepository<T> dataBaseRepository;

@@ -1,6 +1,8 @@
 package com.ecomeerce.rest_api.repositories;
 
-import com.ecomeerce.rest_api.models.Categories;
+import com.ecomeerce.rest_api.models.Category;
+import org.springframework.stereotype.Repository;
 
-public interface CategoryRepository extends DataBaseRepository<Categories>{
+@Repository
+public interface CategoryRepository extends DataBaseRepository<Category>{
 }

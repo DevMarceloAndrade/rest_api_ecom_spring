@@ -14,7 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Categories extends DataBaseModel{
+public class Category extends DataBaseModel{
     @Column(nullable = false, length = 100)
     private String name;
 
@@ -23,8 +23,8 @@ public class Categories extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<SubCategories> subCategories = new HashSet<>();
+    private Set<SubCategory> subCategories = new HashSet<>();
 
-    public Categories() {
+    public Category() {
     }
 }

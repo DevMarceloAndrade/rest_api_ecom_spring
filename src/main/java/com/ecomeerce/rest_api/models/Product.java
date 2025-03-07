@@ -32,7 +32,10 @@ public class Product extends DataBaseModel {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_category_id", referencedColumnName = "id_")
-    private SubCategories subCategory;
+    private SubCategory subCategory;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private ProductPromotion productPromotion;
 
     public Product() {
     }
