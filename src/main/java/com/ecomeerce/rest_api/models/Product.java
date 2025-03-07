@@ -1,11 +1,9 @@
 package com.ecomeerce.rest_api.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pro.handler.file.vo.v1.UploadFileResponseVO;
-
-import java.io.Serial;
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
@@ -31,7 +29,10 @@ public class Product extends DataBaseModel {
     @Column(nullable = false, columnDefinition = "BOOLEAN default 'false'")
     private Boolean promotion;
 
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_")
+    private SubCategories subCategory;
 
     public Product() {
     }
