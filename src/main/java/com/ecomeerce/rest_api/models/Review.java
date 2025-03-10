@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Reviews extends DataBaseModel{
+public class Review extends DataBaseModel{
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id_")
@@ -33,6 +33,6 @@ public class Reviews extends DataBaseModel{
     @Max(5)
     private Integer rating;
 
-    public Reviews() {
+    public Review() {
     }
 }

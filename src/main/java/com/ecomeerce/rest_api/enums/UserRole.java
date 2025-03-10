@@ -1,4 +1,4 @@
-package com.ecomeerce.rest_api.roles;
+package com.ecomeerce.rest_api.enums;
 
 public enum UserRole {
     ADMIN,

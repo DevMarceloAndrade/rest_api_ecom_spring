@@ -48,7 +48,7 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<Reviews> reviews = new HashSet<>();
+    private Set<Review> reviews = new HashSet<>();
 
     public Product() {
     }

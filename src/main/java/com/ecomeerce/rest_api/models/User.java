@@ -1,6 +1,6 @@
 package com.ecomeerce.rest_api.models;
 
-import com.ecomeerce.rest_api.roles.UserRole;
+import com.ecomeerce.rest_api.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -52,7 +52,11 @@ public class User extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Reviews> reviews = new HashSet<>();
+    private Set<Review> reviews = new HashSet<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Purchase> purchases = new HashSet<>();
 
     public User() {
     }
