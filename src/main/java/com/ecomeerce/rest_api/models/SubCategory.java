@@ -22,7 +22,7 @@ public class SubCategory extends DataBaseModel {
     private Category category;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "subCategory", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sub_category", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 
     public SubCategory() {

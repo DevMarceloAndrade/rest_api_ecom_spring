@@ -13,6 +13,11 @@ import java.util.Set;
 @Entity
 public class Product extends DataBaseModel {
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_")
+    private SubCategory sub_category;
+
     @Column(nullable = false, length = 100)
     private String name;
 
@@ -31,13 +36,11 @@ public class Product extends DataBaseModel {
     @Column(nullable = false, columnDefinition = "BOOLEAN default 'false'")
     private Boolean promotion;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_")
-    private SubCategory subCategory;
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private ProductCharacteristics characteristics;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    private ProductPromotion productPromotion;
+    private ProductPromotion product_promotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
