@@ -34,7 +34,7 @@ public class User extends DataBaseModel {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "VARCHAR(5) DEFAULT 'USER'")
     private UserRole role;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -50,7 +50,10 @@ public class User extends DataBaseModel {
     )
     private Set<Product> favorites = new HashSet<>();
 
-    public User() {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Reviews> reviews = new HashSet<>();
 
+    public User() {
     }
 }

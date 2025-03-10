@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -40,7 +41,11 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
-    private Set<User> favorites_by_user;
+    private Set<User> favorites_by_user = new HashSet<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<Reviews> reviews = new HashSet<>();
 
     public Product() {
     }
