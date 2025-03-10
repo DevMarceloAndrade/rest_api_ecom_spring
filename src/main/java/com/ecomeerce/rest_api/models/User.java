@@ -41,6 +41,15 @@ public class User extends DataBaseModel {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Address> addresses = new HashSet<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> favorites = new HashSet<>();
+
     public User() {
 
     }
