@@ -2,6 +2,7 @@ package com.ecomeerce.rest_api.models;
 
 import com.ecomeerce.rest_api.enums.PaymentStatus;
 import com.ecomeerce.rest_api.enums.PaymentType;
+import com.ecomeerce.rest_api.exception.InvalidJsonFormatException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,14 +52,22 @@ public class Purchase extends DataBaseModel {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal shipping_cost;
 
-    public Address getAddress() throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return  objectMapper.readValue(this.address, Address.class);
+    public Address getAddress() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return  objectMapper.readValue(this.address, Address.class);
+        }catch (JsonProcessingException e){
+            throw new InvalidJsonFormatException("The address format must be Json");
+        }
     }
 
-    public void setAddress(String address) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        this.address = objectMapper.writeValueAsString(address);
+    public void setAddress(String address) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            this.address = objectMapper.writeValueAsString(address);
+        }catch (JsonProcessingException e){
+            throw new InvalidJsonFormatException("The address format must be Json");
+        }
     }
 
     public void setPayment_type(String payment_type) {
