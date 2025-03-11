@@ -1,14 +1,14 @@
 package com.ecomeerce.rest_api.enums;
 
 public enum PaymentType {
-    ticket,
-    credit_card,
-    debit_card,
-    bank_transfer,
-    atm,
-    prepaid_card,
-    digital_currency,
-    digital_wallet,
-    voucher_card,
-    crypto_transfer
+    TICKET,
+    CREDIT_CARD,
+    DEBIT_CARD,
+    BANK_TRANSFER,
+    ATM,
+    PREPAID_CARD,
+    DIGITAL_CURRENCY,
+    DIGITAL_WALLET,
+    VOUCHER_CARD,
+    CRYPTO_TRANSFER
 }

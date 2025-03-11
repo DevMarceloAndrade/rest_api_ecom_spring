@@ -54,6 +54,14 @@ public class Purchase extends DataBaseModel {
         this.address = objectMapper.writeValueAsString(address);
     }
 
+    public void setPayment_type(String payment_type) {
+        this.payment_type = PaymentType.valueOf(payment_type.toUpperCase());
+    }
+
+    public void setPayment_status(String payment_status) {
+        this.payment_status = PaymentStatus.valueOf(payment_status.toUpperCase());
+    }
+
     public Purchase() {
     }
 }
