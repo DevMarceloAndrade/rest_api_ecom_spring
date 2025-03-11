@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Entity
 public class ProductPromotion extends DataBaseModel{
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(nullable = false)

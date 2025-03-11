@@ -9,7 +9,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -20,6 +23,10 @@ public class Purchase extends DataBaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id_")
     private User user;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
+    private Set<ProductPurchased> productsPurchased = new HashSet<>();
 
     @Column(nullable = false,columnDefinition = "JSON")
     private String address;
@@ -41,7 +48,7 @@ public class Purchase extends DataBaseModel {
     @Column
     private String status;
 
-    @Column(nullable = false,length = 6)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal shipping_cost;
 
     public Address getAddress() throws JsonProcessingException {
