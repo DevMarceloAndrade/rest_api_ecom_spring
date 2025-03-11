@@ -1,5 +1,7 @@
 package com.ecomeerce.rest_api.models;
 
+import com.ecomeerce.rest_api.enums.PaymentStatus;
+import com.ecomeerce.rest_api.enums.PaymentType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,11 +24,13 @@ public class Purchase extends DataBaseModel {
     @Column(nullable = false,columnDefinition = "JSON")
     private String address;
 
+    @Enumerated
     @Column(length = 20)
-    private String payment_type;
+    private PaymentType payment_type;
 
+    @Enumerated
     @Column(length = 20)
-    private String payment_status;
+    private PaymentStatus payment_status;
 
     @Column
     private String payment_id_mp;
