@@ -25,6 +25,15 @@ public class SubCategory extends DataBaseModel {
     @OneToMany(mappedBy = "sub_category", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "sub_category_tags",
+            joinColumns = @JoinColumn(name = "sub_category_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags = new HashSet<>();
+
     public SubCategory() {
     }
 }

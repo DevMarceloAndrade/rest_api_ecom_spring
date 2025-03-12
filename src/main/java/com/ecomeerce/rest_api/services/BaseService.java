@@ -40,7 +40,7 @@ public class BaseService<T> {
     }
 
     @Transactional(readOnly = true)
-    public T getById(UUID id){
+    public T readById(UUID id){
         return dataBaseRepository.findById(id)
                 .orElseThrow(EntityDoesNotExist::new);
     }
