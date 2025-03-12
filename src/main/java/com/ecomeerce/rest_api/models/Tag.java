@@ -1,11 +1,16 @@
 package com.ecomeerce.rest_api.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
 public class Tag extends DataBaseModel{
 
     @Column(nullable = false, length = 20)
@@ -13,8 +18,17 @@ public class Tag extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id", referencedColumnName = "id_")
+    @JoinColumn(name = "tag_type_id", referencedColumnName = "id_")
     private TagType tag_type;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_tag",
+            joinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id_"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id_")
+    )
+    private Set<Product> products = new HashSet<>();
 
     public Tag() {
     }

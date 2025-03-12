@@ -38,7 +38,7 @@ public class User extends DataBaseModel {
     private UserRole role;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

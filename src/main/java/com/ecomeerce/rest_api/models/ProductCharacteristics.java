@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class ProductCharacteristics extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "product_id", referencedColumnName = "id_")
     private Product product;
 

@@ -36,9 +36,11 @@ public class Product extends DataBaseModel {
     @Column(nullable = false, columnDefinition = "BOOLEAN default 'false'")
     private Boolean promotion;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private ProductCharacteristics characteristics;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private ProductPromotion product_promotion;
 
@@ -49,6 +51,10 @@ public class Product extends DataBaseModel {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private Set<Tag> tags = new HashSet<>();
 
     public Product() {
     }

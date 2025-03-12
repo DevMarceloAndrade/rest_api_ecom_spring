@@ -17,8 +17,8 @@ public class TagType extends DataBaseModel {
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToMany(mappedBy = "sub_category_tags",fetch = FetchType.LAZY)
-    private SubCategory subCategory;
+    @ManyToMany(mappedBy = "tags",fetch = FetchType.LAZY)
+    private Set<SubCategory> sub_category = new HashSet<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "tag_type",fetch = FetchType.LAZY)
