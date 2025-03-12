@@ -30,9 +30,9 @@ public class SubCategory extends DataBaseModel {
     @JoinTable(
             name = "sub_category_tags",
             joinColumns = @JoinColumn(name = "sub_category_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
+            inverseJoinColumns = @JoinColumn(name = "tag_type_id")
     )
-    private Set<Tag> tags = new HashSet<>();
+    private Set<TagType> tags = new HashSet<>();
 
     public SubCategory() {
     }
