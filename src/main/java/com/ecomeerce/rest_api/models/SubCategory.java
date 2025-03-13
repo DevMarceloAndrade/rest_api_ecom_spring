@@ -17,8 +17,8 @@ public class SubCategory extends DataBaseModel {
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "id_", nullable = false)
     private Category category;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

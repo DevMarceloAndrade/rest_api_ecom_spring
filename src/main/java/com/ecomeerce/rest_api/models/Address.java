@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
 public class Address extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id_", nullable = false)
     private User user;
 
     @Column(nullable = false, length = 8)

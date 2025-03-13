@@ -17,8 +17,8 @@ public class Tag extends DataBaseModel{
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_type_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tag_type_id", referencedColumnName = "id_", nullable = false)
     private TagType tag_type;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

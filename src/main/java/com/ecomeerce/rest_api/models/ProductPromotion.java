@@ -19,13 +19,13 @@ public class ProductPromotion extends DataBaseModel{
     private String description;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "promotion_id", referencedColumnName = "id_", nullable = false)
     private Promotion promotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "product_id", referencedColumnName = "id_")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
     private Product product;
 
     public ProductPromotion() {

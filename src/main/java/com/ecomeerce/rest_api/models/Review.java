@@ -13,13 +13,13 @@ import lombok.EqualsAndHashCode;
 public class Review extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="user_id", referencedColumnName = "id_" ,nullable = false)
     private User user;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="product_id", referencedColumnName = "id_", nullable = false)
     private Product product;
 
     @Column(nullable = false, length = 100)

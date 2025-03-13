@@ -34,6 +34,10 @@ public class File extends DataBaseModel{
     @JoinColumn(name = "product_id")
     private Product product_id;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(mappedBy = "thumbnail", cascade = CascadeType.REFRESH)
+    private Promotion promotion;
+
     public File() {
     }
 }

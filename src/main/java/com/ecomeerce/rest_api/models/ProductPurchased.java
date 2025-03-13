@@ -13,13 +13,13 @@ import java.math.BigDecimal;
 public class ProductPurchased extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "purchase_id", referencedColumnName = "id_" ,nullable = false)
     private Purchase purchase;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
     private Product product;
 
     @Column(nullable = false)

@@ -21,7 +21,7 @@ public class TagType extends DataBaseModel {
     private Set<SubCategory> sub_category = new HashSet<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "tag_type",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tag_type",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Tag> tags = new HashSet<>();
 
     public TagType() {

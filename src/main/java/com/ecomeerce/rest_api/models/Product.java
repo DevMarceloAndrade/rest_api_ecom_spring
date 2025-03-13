@@ -14,8 +14,8 @@ import java.util.Set;
 public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_" ,nullable = false)
     private SubCategory sub_category;
 
     @Column(nullable = false, length = 100)
