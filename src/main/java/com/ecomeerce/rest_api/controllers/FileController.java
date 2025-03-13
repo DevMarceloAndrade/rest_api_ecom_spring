@@ -1,5 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
+import com.ecomeerce.rest_api.models.File;
+import com.ecomeerce.rest_api.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,10 +13,10 @@ import pro.handler.file.vo.v1.UploadFileResponseVO;
 @RestController
 public class FileController {
     @Autowired
-    private FileStorageService fileStorageService;
+    private FileService fileService;
 
     @PostMapping("/api/file/post")
-    public UploadFileResponseVO uploadFile(@RequestParam("file") MultipartFile file){
-        return fileStorageService.uploadFile(file);
+    public File uploadFile(@RequestParam("file") MultipartFile multipartFile){
+        return fileService.create(multipartFile);
     }
 }
