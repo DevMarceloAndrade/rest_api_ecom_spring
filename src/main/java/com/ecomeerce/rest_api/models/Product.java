@@ -37,6 +37,15 @@ public class Product extends DataBaseModel {
     private Boolean promotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "thumbnail_id")
+    private File thumbnail;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<File> files = new HashSet<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private ProductCharacteristics characteristics;
 
