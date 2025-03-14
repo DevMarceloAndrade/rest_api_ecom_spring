@@ -12,6 +12,6 @@ public class FileIdToFileConverter extends DataConverterById<File> {
     @Autowired
     public FileIdToFileConverter(FileService baseService) {
         super(baseService);
-        
+
     }
 }

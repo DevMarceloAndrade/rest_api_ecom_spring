@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class BaseService<T> {
 
-    private final DataBaseRepository<T> dataBaseRepository;
+    protected final DataBaseRepository<T> dataBaseRepository;
     private final Validator validator;
 
     public BaseService(DataBaseRepository<T> dataBaseRepository,Validator validator) {
@@ -53,10 +53,9 @@ public class BaseService<T> {
     }
 
     @Transactional
-    public String deleteById(UUID id){
+    public void deleteById(UUID id){
         checkEntityById(id);
         dataBaseRepository.deleteById(id);
-        return "Successfully deleted";
     }
 
 }

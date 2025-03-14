@@ -5,9 +5,12 @@ import com.ecomeerce.rest_api.repositories.FileRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pro.handler.file.services.FileStorageService;
 import pro.handler.file.vo.v1.UploadFileResponseVO;
+
+import java.util.UUID;
 
 @Service
 public class FileService extends BaseService<File>{
@@ -31,5 +34,14 @@ public class FileService extends BaseService<File>{
         file.setFile_type(uploadFile.getFileType());
 
         return super.create(file);
+    }
+
+    public String delete(UUID id){
+        super.checkEntityById(id);
+        File fileToDelete = super.readById(id);
+        fileStorageService.deleteFile(fileToDelete.getFile_name(),fileToDelete.getFile_targetLocation());
+        deleteById(id);
+
+        return "File deleted";
     }
 }

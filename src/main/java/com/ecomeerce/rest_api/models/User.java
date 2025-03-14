@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.ColumnDefault;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +36,8 @@ public class User extends DataBaseModel {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "VARCHAR(5) DEFAULT 'USER'")
+    @Column(nullable = false)
+    @ColumnDefault("'USER'")
     private UserRole role;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
