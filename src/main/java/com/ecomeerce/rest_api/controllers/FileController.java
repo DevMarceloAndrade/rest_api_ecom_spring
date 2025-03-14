@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pro.handler.file.services.FileStorageService;
 import pro.handler.file.vo.v1.UploadFileResponseVO;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,5 +25,10 @@ public class FileController {
     @DeleteMapping("/delete/{id}")
     public String deleteFile(@PathVariable("id") UUID id){
         return fileService.delete(id);
+    }
+
+    @DeleteMapping("/delete")
+    public List<String> deleteAllFile(@RequestBody List<UUID> ids){
+        return fileService.deleteAllFile(ids);
     }
 }
