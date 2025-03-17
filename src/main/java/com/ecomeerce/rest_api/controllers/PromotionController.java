@@ -7,6 +7,8 @@ import com.ecomeerce.rest_api.services.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -32,6 +34,11 @@ public class PromotionController {
         return promotionService.create(jsonData);
     }
 
+    @GetMapping("/{id}")
+    public Promotion getPromotion(@PathVariable("id") UUID id){
+        return promotionService.getCompletePromotion(id);
+    }
+
     @PostMapping("/{id}/upload/thumbnail")
     public Promotion uploadPromotionThumbnail(@PathVariable("id") UUID id, @RequestParam("file") MultipartFile file){
         promotionService.checkEntityById(id);
@@ -46,6 +53,12 @@ public class PromotionController {
         promotion.setThumbnail(fileUploaded);
         promotionService.updateById(id,promotion);
         return promotion;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deletePromotion(@PathVariable("id") UUID id){
+        promotionService.deleteById(id);
+        return "Promotion Deleted";
     }
 
 }

@@ -35,13 +35,16 @@ public class File extends DataBaseModel{
     private Product product_id;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "thumbnail")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "thumbnail")
     private Promotion promotion;
 
     public File(String file_name, String file_type, Long file_size) {
         this.file_name = file_name;
         this.file_type = file_type;
         this.file_size = file_size;
+    }
+
+    public File() {
     }
 
     @PreRemove
