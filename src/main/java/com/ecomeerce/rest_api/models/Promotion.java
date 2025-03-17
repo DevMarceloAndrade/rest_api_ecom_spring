@@ -25,7 +25,7 @@ public class Promotion extends DataBaseModel{
     private Boolean featured;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "promotion", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "promotion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ProductPromotion> products_promotion = new HashSet<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

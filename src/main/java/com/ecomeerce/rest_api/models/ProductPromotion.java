@@ -24,10 +24,16 @@ public class ProductPromotion extends DataBaseModel{
     private Promotion promotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
     private Product product;
 
     public ProductPromotion() {
+    }
+
+    @PreRemove
+    private void preRemove(){
+        if(promotion!=null) promotion.setThumbnail(null);
+        if (product != null) product.setThumbnail(null);
     }
 }

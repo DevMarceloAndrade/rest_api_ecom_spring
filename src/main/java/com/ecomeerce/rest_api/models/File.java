@@ -38,16 +38,16 @@ public class File extends DataBaseModel{
     @OneToOne(mappedBy = "thumbnail")
     private Promotion promotion;
 
-    public File() {
+    public File(String file_name, String file_type, Long file_size) {
+        this.file_name = file_name;
+        this.file_type = file_type;
+        this.file_size = file_size;
     }
 
     @PreRemove
     private void preRemove(){
-        if(promotion!=null){
-            promotion.setThumbnail(null);
-        }
-        if (product != null) {
-            product.setThumbnail(null);
-        }
+        if(promotion!=null) promotion.setThumbnail(null);
+        if (product != null) product.setThumbnail(null);
+        if(product_id !=null)setProduct_id(null);
     }
 }

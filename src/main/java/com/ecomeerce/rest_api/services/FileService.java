@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.services;
 
 import com.ecomeerce.rest_api.models.File;
+import com.ecomeerce.rest_api.models.Product;
 import com.ecomeerce.rest_api.repositories.FileRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class FileService extends BaseService<File>{
 
-    private FileStorageService fileStorageService;
+    private final FileStorageService fileStorageService;
 
     @Autowired
     public FileService(FileRepository dataBaseRepository, Validator validator, FileStorageService fileStorageService) {
@@ -27,17 +28,33 @@ public class FileService extends BaseService<File>{
         this.fileStorageService=fileStorageService;
     }
 
-    public File create(MultipartFile multipartFile, String... subDirs){
+    public File fileStorage(MultipartFile multipartFile, String... subDirs){
         UploadFileResponseVO uploadFile = fileStorageService.uploadFile(multipartFile,subDirs);
 
-        File file = new File();
-        file.setFile_name(uploadFile.getFileName());
-        file.setFile_size(uploadFile.getFileSize());
+        File file = new File(uploadFile.getFileName(),uploadFile.getFileType(),uploadFile.getFileSize());
         file.setFile_downloadUri(uploadFile.getFileDownloadUri());
         file.setFile_targetLocation(uploadFile.getFileTargetLocation());
-        file.setFile_type(uploadFile.getFileType());
 
-        return super.create(file);
+        return file;
+    }
+
+
+    public File create(MultipartFile multipartFile, String... subDirs){
+
+        return super.create(fileStorage(multipartFile,subDirs));
+    }
+
+    public List<File>createAll(MultipartFile[] multipartFiles,Product product ,String... subDirs){
+
+        List<File> filesToCreate = Arrays.stream(multipartFiles).map(multipartFile->{
+            File file = fileStorage(multipartFile,subDirs);
+            file.setProduct_id(product);
+
+            return file;
+        }).toList();
+
+        return super.dataBaseRepository.saveAll(filesToCreate);
+
     }
 
     public String delete(UUID id){

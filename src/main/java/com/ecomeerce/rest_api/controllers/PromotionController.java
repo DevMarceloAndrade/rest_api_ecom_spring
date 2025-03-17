@@ -7,8 +7,6 @@ import com.ecomeerce.rest_api.services.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pro.handler.file.vo.v1.UploadFileResponseVO;
-
 import java.util.UUID;
 
 @RestController
