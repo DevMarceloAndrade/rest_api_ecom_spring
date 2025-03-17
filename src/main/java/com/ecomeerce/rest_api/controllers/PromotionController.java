@@ -5,6 +5,8 @@ import com.ecomeerce.rest_api.models.Promotion;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,8 +37,8 @@ public class PromotionController {
     }
 
     @GetMapping("/{id}")
-    public Promotion getPromotion(@PathVariable("id") UUID id){
-        return promotionService.getCompletePromotion(id);
+    public ResponseEntity<Promotion> getPromotion(@PathVariable("id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(promotionService.getCompletePromotion(id));
     }
 
     @PostMapping("/{id}/upload/thumbnail")

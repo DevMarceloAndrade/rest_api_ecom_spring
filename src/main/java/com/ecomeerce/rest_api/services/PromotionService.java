@@ -6,7 +6,6 @@ import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,7 +22,7 @@ public class PromotionService extends BaseService<Promotion>{
     public Promotion getCompletePromotion(UUID id){
         return promotionRepository.findByIdWithRelations(id);
     }
-//    public Promotion getCompletePromotion(UUID id){
-//        return promotionRepository.findById(id).orElseThrow();
-//    }
+    public Promotion getPromotion(UUID id){
+        return promotionRepository.findById(id).orElseThrow();
+    }
 }
