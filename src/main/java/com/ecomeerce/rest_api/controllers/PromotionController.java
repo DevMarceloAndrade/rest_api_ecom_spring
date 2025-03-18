@@ -4,6 +4,9 @@ import com.ecomeerce.rest_api.models.File;
 import com.ecomeerce.rest_api.models.Promotion;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.PromotionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/promotion")
+@Tag(name = "promotion", description = "Controlador para manipulação de dados das promoções")
 public class PromotionController {
 
     @Autowired
@@ -24,6 +28,9 @@ public class PromotionController {
     private FileService fileService;
 
     @PostMapping("/create")
+    @Operation(summary = "Salva dados da promoção", description = "Método para salvar dados de uma promoção, incluindo ou não uma thumbnail.")
+    @ApiResponse(responseCode = "201", description = "Promoção cadastrada.")
+    @ApiResponse(responseCode = "500", description = "Erro no servidor.")
     public Promotion createPromotion(
             @RequestParam(value = "file", required = false) MultipartFile file,
             @RequestBody Promotion jsonData
@@ -37,11 +44,17 @@ public class PromotionController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtem promoção via ID", description = "Método para obter os dados de uma promoção.")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "500", description = "Erro no servidor.")
     public ResponseEntity<Promotion> getPromotion(@PathVariable("id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(promotionService.getCompletePromotion(id));
     }
 
     @PostMapping("/{id}/upload/thumbnail")
+    @Operation(summary = "Salva thumbnail de uma promoção", description = "Método para salvar apenas a thumbanail de uma promoção.")
+    @ApiResponse(responseCode = "201", description = "Thumbanail cadastrada.")
+    @ApiResponse(responseCode = "500", description = "Erro no servidor.")
     public Promotion uploadPromotionThumbnail(@PathVariable("id") UUID id, @RequestParam("file") MultipartFile file){
         promotionService.checkEntityById(id);
         Promotion promotion = promotionService.readById(id);
@@ -56,7 +69,9 @@ public class PromotionController {
         promotionService.updateById(id,promotion);
         return promotion;
     }
-
+    @Operation(summary = "Deleta uma promoção", description = "Método para deletar uma promoção via ID.")
+    @ApiResponse(responseCode = "201", description = "Promoção Deletada.")
+    @ApiResponse(responseCode = "500", description = "Erro no servidor.")
     @DeleteMapping("/delete/{id}")
     public String deletePromotion(@PathVariable("id") UUID id){
         promotionService.deleteById(id);
