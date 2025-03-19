@@ -36,8 +36,7 @@ public class PromotionController {
             @RequestBody Promotion jsonData
     ){
         if(file!=null){
-            File newThumbnail = fileService.create(file,"promotion",jsonData.getName());
-            jsonData.setThumbnail(newThumbnail);
+            jsonData.setThumbnail(fileService.fileStorage(file,"promotion",jsonData.getName()));
         }
 
         return promotionService.create(jsonData);
@@ -63,9 +62,7 @@ public class PromotionController {
             fileService.delete(promotion.getThumbnail().getId());
         }
 
-        File fileUploaded = fileService.create(file,"promotion", promotion.getName());
-
-        promotion.setThumbnail(fileUploaded);
+        promotion.setThumbnail(fileService.fileStorage(file,"promotion",file.getName()));
         promotionService.updateById(id,promotion);
         return promotion;
     }

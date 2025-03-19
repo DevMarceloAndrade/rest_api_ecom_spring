@@ -1,6 +1,9 @@
 package com.ecomeerce.rest_api.models;
 
+import com.ecomeerce.rest_api.component.CategoryIdToEntityConverter;
+import com.ecomeerce.rest_api.component.FileIdToFileConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +22,7 @@ public class SubCategory extends DataBaseModel {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", referencedColumnName = "id_", nullable = false)
+    @JsonDeserialize(converter = CategoryIdToEntityConverter.class)
     private Category category;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

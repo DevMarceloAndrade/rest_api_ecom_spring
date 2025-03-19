@@ -21,6 +21,7 @@ public class PromotionService extends BaseService<Promotion>{
 
     public Promotion getCompletePromotion(UUID id){
         return promotionRepository.findByIdWithRelations(id);
+
     }
     public Promotion getPromotion(UUID id){
         return promotionRepository.findById(id).orElseThrow();

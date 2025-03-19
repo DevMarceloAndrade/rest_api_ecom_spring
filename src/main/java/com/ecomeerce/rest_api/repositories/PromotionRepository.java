@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface PromotionRepository extends DataBaseRepository<Promotion>{
 
-    @Query("SELECT p FROM Promotion p LEFT JOIN FETCH p.products_promotion LEFT JOIN FETCH p.thumbnail WHERE p.id = :id")
+    @Query("SELECT p FROM Promotion p LEFT JOIN FETCH p.thumbnail WHERE p.id = :id")
     Promotion findByIdWithRelations(@Param("id") UUID id);
 }
