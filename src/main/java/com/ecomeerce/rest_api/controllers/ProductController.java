@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Product> createProduct(
             @RequestParam(value = "file", required = false) MultipartFile file,
             @RequestParam(value = "multipleFiles", required = false) MultipartFile[] multipleFiles,
