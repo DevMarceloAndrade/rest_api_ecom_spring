@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.models.File;
+import com.ecomeerce.rest_api.services.BaseService;
 import com.ecomeerce.rest_api.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

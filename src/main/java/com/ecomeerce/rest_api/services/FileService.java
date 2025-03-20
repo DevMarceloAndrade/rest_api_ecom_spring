@@ -38,9 +38,7 @@ public class FileService extends BaseService<File>{
         return file;
     }
 
-
     public File create(MultipartFile multipartFile, String... subDirs){
-
         return super.create(fileStorage(multipartFile,subDirs));
     }
 

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -28,7 +29,7 @@ public class Tag extends DataBaseModel{
             joinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id_"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id_")
     )
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products;
 
     public Tag() {
     }

@@ -7,9 +7,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -21,9 +19,9 @@ public class Category extends DataBaseModel{
     @Column(nullable = false)
     private Integer position;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<SubCategory> sub_categories = new HashSet<>();
+    private List<SubCategory> sub_categories;
 
     public Category() {
     }

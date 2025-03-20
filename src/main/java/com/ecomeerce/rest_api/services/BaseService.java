@@ -34,7 +34,7 @@ public class BaseService<T> {
     }
 
     @Transactional
-    public T create( T entity ){
+    public T create(T entity){
         validateEntity(entity);
         return dataBaseRepository.save(entity);
     }

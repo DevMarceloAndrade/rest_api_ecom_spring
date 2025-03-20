@@ -5,22 +5,27 @@ import com.ecomeerce.rest_api.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/category")
-public class CategoryController {
+public class CategoryController extends BaseController<Category> {
 
-    @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/")
-    public ResponseEntity<Category> createCategory(@RequestBody Category jsonData){
-        Category newCategory = categoryService.create(jsonData);
+    @Autowired
+    public CategoryController(CategoryService baseService) {
+        super(baseService);
+        this.categoryService = baseService;
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(newCategory);
+    @GetMapping("/t/{id}")
+    public ResponseEntity<Category> teste(@PathVariable("id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdWithRelations(id));
     }
 }

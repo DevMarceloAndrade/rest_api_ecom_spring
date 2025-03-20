@@ -9,11 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +24,7 @@ public class Purchase extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
-    private Set<ProductPurchased> productsPurchased = new HashSet<>();
+    private List<ProductPurchased> productsPurchased;
 
     @Column(nullable = false,columnDefinition = "JSON")
     private String address;

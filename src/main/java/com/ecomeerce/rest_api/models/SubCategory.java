@@ -1,15 +1,12 @@
 package com.ecomeerce.rest_api.models;
 
 import com.ecomeerce.rest_api.component.CategoryIdToEntityConverter;
-import com.ecomeerce.rest_api.component.FileIdToFileConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +24,7 @@ public class SubCategory extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "sub_category", fetch = FetchType.LAZY)
-    private Set<Product> products = new HashSet<>();
+    private List<Product> products;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.LAZY)
@@ -36,7 +33,7 @@ public class SubCategory extends DataBaseModel {
             joinColumns = @JoinColumn(name = "sub_category_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_type_id")
     )
-    private Set<TagType> tags = new HashSet<>();
+    private List<TagType> tags;
 
     public SubCategory() {
     }

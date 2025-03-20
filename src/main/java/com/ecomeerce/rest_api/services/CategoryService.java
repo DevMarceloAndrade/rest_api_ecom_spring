@@ -5,9 +5,18 @@ import com.ecomeerce.rest_api.repositories.CategoryRepository;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CategoryService extends BaseService<Category>{
+    private CategoryRepository categoryRepository;
+
     public CategoryService(CategoryRepository dataBaseRepository, Validator validator) {
         super(dataBaseRepository, validator);
+        this.categoryRepository = dataBaseRepository;
+    }
+
+    public Category findByIdWithRelations(UUID id){
+        return categoryRepository.findByIdWithRelations(id);
     }
 }

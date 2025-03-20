@@ -6,9 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -26,7 +24,7 @@ public class Promotion extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "promotion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<ProductPromotion> products_promotion = new HashSet<>();
+    private List<ProductPromotion> products_promotion;
 
     @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

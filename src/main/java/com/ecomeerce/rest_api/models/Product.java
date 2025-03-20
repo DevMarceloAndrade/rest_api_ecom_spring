@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -48,7 +49,7 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<File> files = new HashSet<>();
+    private List<File> files;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
@@ -60,15 +61,15 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
-    private Set<User> favorites_by_user = new HashSet<>();
+    private List<User> favorites_by_user;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<Review> reviews = new HashSet<>();
+    private List<Review> reviews;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-    private Set<Tag> tags = new HashSet<>();
+    private List<Tag> tags;
 
     public Product() {
     }

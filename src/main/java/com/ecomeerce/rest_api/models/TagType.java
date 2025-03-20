@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -18,11 +16,11 @@ public class TagType extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "tags",fetch = FetchType.LAZY)
-    private Set<SubCategory> sub_category = new HashSet<>();
+    private List<SubCategory> sub_category;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "tag_type",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Tag> tags = new HashSet<>();
+    private List<Tag> tags;
 
     public TagType() {
     }
