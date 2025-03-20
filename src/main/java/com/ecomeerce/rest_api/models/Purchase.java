@@ -24,7 +24,7 @@ public class Purchase extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
-    private List<ProductPurchased> productsPurchased;
+    private List<ProductPurchased> products_purchased;
 
     @Column(nullable = false,columnDefinition = "JSON")
     private String address;

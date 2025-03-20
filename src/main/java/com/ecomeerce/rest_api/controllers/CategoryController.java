@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.models.Category;
+import com.ecomeerce.rest_api.projection.CategoryProjection;
 import com.ecomeerce.rest_api.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class CategoryController extends BaseController<Category> {
     }
 
     @GetMapping("/t/{id}")
-    public ResponseEntity<Category> teste(@PathVariable("id") UUID id){
+    public ResponseEntity<CategoryProjection> teste(@PathVariable("id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdWithRelations(id));
     }
 }

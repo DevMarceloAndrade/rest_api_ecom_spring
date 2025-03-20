@@ -25,4 +25,5 @@ public class Category extends DataBaseModel{
 
     public Category() {
     }
+
 }
