@@ -25,8 +25,8 @@ public class CategoryController extends BaseController<Category> {
         this.categoryService = baseService;
     }
 
-    @GetMapping("/t/{id}")
-    public ResponseEntity<CategoryProjection> teste(@PathVariable("id") UUID id){
+    @GetMapping("/sub-categories/{id}")
+    public ResponseEntity<CategoryProjection> getCategoryByIdIncludingSubCategories(@PathVariable("id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdIncludingSubCategories(id));
     }
 }
