@@ -1,6 +1,8 @@
 package com.ecomeerce.rest_api.services;
 
+import com.ecomeerce.rest_api.exception.EntityDoesNotExist;
 import com.ecomeerce.rest_api.models.Promotion;
+import com.ecomeerce.rest_api.projection.PromotionProjection;
 import com.ecomeerce.rest_api.repositories.PromotionRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,9 @@ public class PromotionService extends BaseService<Promotion>{
         this.promotionRepository = dataBaseRepository;
     }
 
-    public Promotion getCompletePromotion(UUID id){
-        return promotionRepository.findByIdWithRelations(id);
+    public PromotionProjection getCompletePromotion(UUID id){
+        return promotionRepository.findByIdWithRelations(id)
+                .orElseThrow(EntityDoesNotExist::new);
 
-    }
-    public Promotion getPromotion(UUID id){
-        return promotionRepository.findById(id).orElseThrow();
     }
 }

@@ -14,5 +14,5 @@ public interface CategoryRepository extends DataBaseRepository<Category>{
 
 
     @Query("SELECT c FROM Category c LEFT JOIN FETCH sub_categories WHERE c.id = :id")
-    CategoryProjection findByIdWithRelations(@Param("id") UUID uuid);
+    Optional<CategoryProjection> findByIdIncludingSubCategories(@Param("id") UUID uuid);
 }

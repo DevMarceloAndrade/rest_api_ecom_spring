@@ -8,9 +8,4 @@ public interface CategoryProjection {
     String getName();
     Integer getPosition();
     List<SubCategoryProjection> getSub_categories();
-
-    interface SubCategoryProjection{
-        UUID getId();
-        String getName();
-    }
 }

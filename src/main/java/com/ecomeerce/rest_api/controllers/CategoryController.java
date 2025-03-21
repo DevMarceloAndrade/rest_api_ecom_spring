@@ -27,6 +27,6 @@ public class CategoryController extends BaseController<Category> {
 
     @GetMapping("/t/{id}")
     public ResponseEntity<CategoryProjection> teste(@PathVariable("id") UUID id){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdWithRelations(id));
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdIncludingSubCategories(id));
     }
 }

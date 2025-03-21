@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.models.Promotion;
+import com.ecomeerce.rest_api.projection.PromotionProjection;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.PromotionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +45,7 @@ public class PromotionController {
     @Operation(summary = "Obtem promoção via ID", description = "Método para obter os dados de uma promoção.")
     @ApiResponse(responseCode = "201")
     @ApiResponse(responseCode = "500", description = "Erro no servidor.")
-    public ResponseEntity<Promotion> getPromotion(@PathVariable("id") UUID id){
+    public ResponseEntity<PromotionProjection> getPromotion(@PathVariable("id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(promotionService.getCompletePromotion(id));
     }
 
@@ -62,6 +63,7 @@ public class PromotionController {
 
         promotion.setThumbnail(fileService.fileStorage(file,"promotion",file.getName()));
         promotionService.updateById(id,promotion);
+
         return ResponseEntity.status(HttpStatus.OK).body(promotion);
     }
     @Operation(summary = "Deleta uma promoção", description = "Método para deletar uma promoção via ID.")

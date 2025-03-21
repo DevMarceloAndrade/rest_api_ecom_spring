@@ -1,5 +1,6 @@
 package com.ecomeerce.rest_api.services;
 
+import com.ecomeerce.rest_api.exception.EntityDoesNotExist;
 import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.projection.CategoryProjection;
 import com.ecomeerce.rest_api.repositories.CategoryRepository;
@@ -17,7 +18,8 @@ public class CategoryService extends BaseService<Category>{
         this.categoryRepository = dataBaseRepository;
     }
 
-    public CategoryProjection findByIdWithRelations(UUID id){
-        return categoryRepository.findByIdWithRelations(id);
+    public CategoryProjection findByIdIncludingSubCategories(UUID id){
+        return categoryRepository.findByIdIncludingSubCategories(id)
+                .orElseThrow(EntityDoesNotExist::new);
     }
 }
