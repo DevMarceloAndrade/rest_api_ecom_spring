@@ -17,7 +17,7 @@ public class ProductCharacteristics extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
-    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false, updatable = false)
     @JsonDeserialize(converter = ProductIdToEntityConverter.class)
     private Product product;
 
