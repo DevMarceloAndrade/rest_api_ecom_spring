@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,10 +46,14 @@ public class BaseService<T> {
                 .orElseThrow(EntityDoesNotExist::new);
     }
 
+    @Transactional(readOnly = true)
+    public List<T> readAll(){
+        return dataBaseRepository.findAll();
+    }
+
     @Transactional
     public T updateById(UUID id, T entity){
             checkEntityById(id);
-            validateEntity(entity);
             return dataBaseRepository.save(entity);
     }
 
@@ -56,6 +61,11 @@ public class BaseService<T> {
     public void deleteById(UUID id){
         checkEntityById(id);
         dataBaseRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteMultipleById(List<UUID> ids){
+        dataBaseRepository.deleteAllById(ids);
     }
 
 }

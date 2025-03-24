@@ -7,19 +7,26 @@ import com.ecomeerce.rest_api.repositories.CategoryRepository;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class CategoryService extends BaseService<Category>{
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public CategoryService(CategoryRepository dataBaseRepository, Validator validator) {
         super(dataBaseRepository, validator);
         this.categoryRepository = dataBaseRepository;
     }
 
-    public CategoryProjection findByIdIncludingSubCategories(UUID id){
-        return categoryRepository.findByIdIncludingSubCategories(id)
+    public CategoryProjection findByIdStandardType(UUID id){
+        return categoryRepository.findByIdStandardType(id)
                 .orElseThrow(EntityDoesNotExist::new);
     }
+
+    public List<CategoryProjection> findAllStandardType(){
+        return categoryRepository.findAllStandardType()
+                .orElseThrow(EntityDoesNotExist::new);
+    }
+
 }

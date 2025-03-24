@@ -20,12 +20,12 @@ public class ProductPromotion extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "promotion_id", referencedColumnName = "id_", nullable = false)
+    @JoinColumn(name = "promotion_id", referencedColumnName = "id_")
     private Promotion promotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id_")
     private Product product;
 
     public ProductPromotion() {

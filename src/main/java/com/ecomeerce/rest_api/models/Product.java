@@ -7,10 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -19,7 +18,7 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_" ,nullable = false)
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "id_", nullable = false)
     @JsonDeserialize(converter = SubCategoryIdToEntityConverter.class)
     private SubCategory sub_category;
 
@@ -35,42 +34,48 @@ public class Product extends DataBaseModel {
     @Column(nullable = false)
     private Integer in_stock;
 
-    @Column(nullable = false, columnDefinition = "BOOLEAN default 'false'")
+    @Column(nullable = false)
     private Boolean featured;
 
-    @Column(nullable = false, columnDefinition = "BOOLEAN default 'false'")
+    @Column(nullable = false)
     private Boolean promotion;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "thumbnail_id")
     @JsonDeserialize(converter = FileIdToFileConverter.class)
     private File thumbnail;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<File> files;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ProductCharacteristics characteristics;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ProductPromotion product_promotion;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
     private List<User> favorites_by_user;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private List<Tag> tags;
 
     public Product() {
+    }
+
+    @PrePersist
+    public void preCreateOrUpdate(){
+        if (promotion == null)promotion = false;
+        if (featured == null) featured = false;
     }
 }

@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController extends BaseController<Category> {
 
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
     public CategoryController(CategoryService baseService) {
@@ -26,7 +27,12 @@ public class CategoryController extends BaseController<Category> {
     }
 
     @GetMapping("/sub-categories/{id}")
-    public ResponseEntity<CategoryProjection> getCategoryByIdIncludingSubCategories(@PathVariable("id") UUID id){
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdIncludingSubCategories(id));
+    public ResponseEntity<CategoryProjection> getCategoryByIdStandardType(@PathVariable("id") UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findByIdStandardType(id));
+    }
+
+    @GetMapping("/sub-categories/")
+    public ResponseEntity<List<CategoryProjection>> getAllCategoryStandardType() {
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAllStandardType());
     }
 }

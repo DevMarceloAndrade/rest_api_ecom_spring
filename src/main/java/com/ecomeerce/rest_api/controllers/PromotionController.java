@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,8 +46,16 @@ public class PromotionController {
     @Operation(summary = "Obtem promoção via ID", description = "Método para obter os dados de uma promoção.")
     @ApiResponse(responseCode = "201")
     @ApiResponse(responseCode = "500", description = "Erro no servidor.")
-    public ResponseEntity<PromotionProjection> getPromotion(@PathVariable("id") UUID id){
-        return ResponseEntity.status(HttpStatus.OK).body(promotionService.getCompletePromotion(id));
+    public ResponseEntity<PromotionProjection> readPromotionById(@PathVariable("id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(promotionService.findByIdStandardType(id));
+    }
+
+    @GetMapping("/")
+    @Operation(summary = "Obtem promoção via ID", description = "Método para obter os dados de uma promoção.")
+    @ApiResponse(responseCode = "201")
+    @ApiResponse(responseCode = "500", description = "Erro no servidor.")
+    public ResponseEntity<List<PromotionProjection>> readAllPromotion(){
+        return ResponseEntity.status(HttpStatus.OK).body(promotionService.findAllStandardType());
     }
 
     @PostMapping("/{id}/upload/thumbnail")
