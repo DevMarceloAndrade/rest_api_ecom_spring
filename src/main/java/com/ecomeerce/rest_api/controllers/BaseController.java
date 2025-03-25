@@ -1,12 +1,9 @@
 package com.ecomeerce.rest_api.controllers;
 
-import com.ecomeerce.rest_api.models.Product;
 import com.ecomeerce.rest_api.services.BaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
