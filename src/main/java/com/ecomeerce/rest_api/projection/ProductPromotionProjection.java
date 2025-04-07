@@ -10,6 +10,5 @@ public interface ProductPromotionProjection {
     UUID getId();
     BigDecimal getPrice();
     String getDescription();
-    PromotionProjection getPromotion();
     ProductProjection getProduct();
 }
