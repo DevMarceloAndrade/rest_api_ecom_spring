@@ -41,4 +41,9 @@ public class ProductCharacteristics extends DataBaseModel{
 
     public ProductCharacteristics() {
     }
+
+    @PreRemove
+    public void preRemove(){
+        if(product != null)setProduct(null);
+    }
 }

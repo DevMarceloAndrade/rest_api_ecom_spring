@@ -38,7 +38,7 @@ public class ProductPromotion extends DataBaseModel{
 
     @PreRemove
     private void preRemove(){
-        if(promotion!=null) promotion.setThumbnail(null);
-        if (product != null) product.setThumbnail(null);
+        if(promotion!=null) setPromotion(null);
+        if (product != null) setProduct(null);
     }
 }

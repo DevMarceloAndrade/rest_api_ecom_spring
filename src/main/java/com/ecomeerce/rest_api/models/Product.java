@@ -70,6 +70,10 @@ public class Product extends DataBaseModel {
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private List<Tag> tags;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<ProductPurchased> productsPurchased;
+
     public Product() {
     }
 

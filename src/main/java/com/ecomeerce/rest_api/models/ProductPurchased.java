@@ -12,6 +12,9 @@ import java.math.BigDecimal;
 @Entity
 public class ProductPurchased extends DataBaseModel{
 
+    @Column(nullable = false)
+    private String product_name;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "purchase_id", referencedColumnName = "id_" ,nullable = false)
