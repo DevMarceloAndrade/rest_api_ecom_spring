@@ -4,12 +4,13 @@ import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.projection.CategoryProjection;
 import com.ecomeerce.rest_api.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +33,14 @@ public class CategoryController extends BaseController<Category> {
     }
 
     @GetMapping("/sub-categories/")
-    public ResponseEntity<List<CategoryProjection>> getAllCategoryStandardType() {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAllStandardType());
+    public ResponseEntity<Page<CategoryProjection>> getAllCategoryStandardType(
+            @RequestParam(value = "orderBy", required = false, defaultValue = "created_at") String orderBy,
+            @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
+            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage
+    ) {
+        Pageable pageable = PageRequest.of(page-1,perPage,Sort.by(orderType,orderBy));
+
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAllStandardType(pageable));
     }
 }

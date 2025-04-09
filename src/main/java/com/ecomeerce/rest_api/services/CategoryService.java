@@ -5,9 +5,9 @@ import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.projection.CategoryProjection;
 import com.ecomeerce.rest_api.repositories.CategoryRepository;
 import jakarta.validation.Validator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,8 +24,8 @@ public class CategoryService extends BaseService<Category>{
                 .orElseThrow(EntityDoesNotExist::new);
     }
 
-    public List<CategoryProjection> findAllStandardType(){
-        return categoryRepository.findAllStandardType()
+    public Page<CategoryProjection> findAllStandardType(Pageable pageable){
+        return categoryRepository.findAllStandardType(pageable)
                 .orElseThrow(EntityDoesNotExist::new);
     }
 

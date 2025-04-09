@@ -4,8 +4,9 @@ import com.ecomeerce.rest_api.exception.InvalidEntityException;
 import com.ecomeerce.rest_api.repositories.DataBaseRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -47,8 +48,9 @@ public class BaseService<T> {
     }
 
     @Transactional(readOnly = true)
-    public List<T> readAll(){
-        return dataBaseRepository.findAll();
+    public Page<T> readAll(Pageable pageable){
+
+        return dataBaseRepository.findAll(pageable);
     }
 
     @Transactional

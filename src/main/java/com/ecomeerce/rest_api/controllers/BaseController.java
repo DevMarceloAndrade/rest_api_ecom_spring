@@ -1,6 +1,10 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.services.BaseService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +35,14 @@ public class BaseController<T> {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<T>> readAllEntity(){
-        List<T> searchEntity = baseService.readAll();
+    public ResponseEntity<Page<T>> readAllEntity(
+            @RequestParam(value = "orderBy", required = false, defaultValue = "created_at") String orderBy,
+            @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
+            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage
+    ){
+        Pageable pageable = PageRequest.of(page-1,perPage,Sort.by(orderType,orderBy));
+        Page<T> searchEntity = baseService.readAll(pageable);
 
         return ResponseEntity.status(HttpStatus.OK).body(searchEntity);
     }

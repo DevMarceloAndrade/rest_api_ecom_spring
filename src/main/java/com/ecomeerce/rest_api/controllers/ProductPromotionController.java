@@ -3,6 +3,7 @@ package com.ecomeerce.rest_api.controllers;
 import com.ecomeerce.rest_api.models.ProductPromotion;
 import com.ecomeerce.rest_api.projection.ProductPromotionProjection;
 import com.ecomeerce.rest_api.services.ProductPromotionService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,14 +25,14 @@ public class ProductPromotionController extends BaseController<ProductPromotion>
     }
 
     @GetMapping("/promotion/{id}")
-    public ResponseEntity<List<ProductPromotionProjection>> readProductPromotionByPromotionId(
+    public ResponseEntity<Page<ProductPromotionProjection>> readProductsPromotionByPromotionId(
             @PathVariable("id")UUID id,
             @RequestParam(value = "orderBy", required = false, defaultValue = "created_at") String orderBy,
             @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage
     ){
-        Pageable pageable = PageRequest.of(0,10,Sort.by(Sort.Direction.ASC,"created_at"));
+        Pageable pageable = PageRequest.of(page-1,perPage,Sort.by(orderType,orderBy));
 
         return ResponseEntity.status(HttpStatus.OK).body(productPromotionService.readByPromotionId(id,pageable));
     }
