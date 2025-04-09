@@ -11,19 +11,19 @@ import lombok.EqualsAndHashCode;
 public class File extends DataBaseModel{
 
     @Column(nullable = false)
-    private String file_name;
+    private String name;
+
+    @Column(name = "download_uri", nullable = false)
+    private String downloadUri;
+
+    @Column(name = "target_location", nullable = false)
+    private String targetLocation;
 
     @Column(nullable = false)
-    private String file_downloadUri;
+    private String type;
 
     @Column(nullable = false)
-    private String file_targetLocation;
-
-    @Column(nullable = false)
-    private String file_type;
-
-    @Column(nullable = false)
-    private Long file_size;
+    private Long size;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "thumbnail")
@@ -32,16 +32,16 @@ public class File extends DataBaseModel{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product_id;
+    private Product productId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "thumbnail")
     private Promotion promotion;
 
-    public File(String file_name, String file_type, Long file_size) {
-        this.file_name = file_name;
-        this.file_type = file_type;
-        this.file_size = file_size;
+    public File(String name, String type, Long size) {
+        this.name = name;
+        this.type = type;
+        this.size = size;
     }
 
     public File() {
@@ -51,6 +51,6 @@ public class File extends DataBaseModel{
     private void preRemove(){
         if(promotion!=null) promotion.setThumbnail(null);
         if (product != null) product.setThumbnail(null);
-        if(product_id !=null)setProduct_id(null);
+        if(productId !=null)setProductId(null);
     }
 }

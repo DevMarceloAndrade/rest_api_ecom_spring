@@ -21,7 +21,7 @@ public class Category extends DataBaseModel{
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<SubCategory> sub_categories;
+    private List<SubCategory> subCategories;
 
     public Category() {
     }

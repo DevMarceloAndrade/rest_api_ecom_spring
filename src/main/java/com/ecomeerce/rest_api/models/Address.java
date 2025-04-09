@@ -31,14 +31,14 @@ public class Address extends DataBaseModel {
     @Column(nullable = false, length = 100)
     private String street;
 
-    @Column(nullable = false, length = 10, columnDefinition = "VARCHAR(10) default 'S/N'")
-    private String house_number;
+    @Column(name = "house_number", nullable = false, length = 10, columnDefinition = "VARCHAR(10) default 'S/N'")
+    private String houseNumber;
 
     @Column(nullable = false, length = 20)
     private String complement;
 
-    @Column(nullable = true)
-    private String reference_point;
+    @Column(name = "reference_point",nullable = true)
+    private String referencePoint;
 
     @Column(nullable = false, columnDefinition = "BOOLEAN default 'true'")
     private Boolean active;

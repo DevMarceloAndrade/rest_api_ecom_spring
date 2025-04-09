@@ -43,13 +43,13 @@ public class ProductController extends BaseController<Product>{
         Product newProduct = productService.create(jsonData);
 
         if (file != null) {
-            SubCategory subCategory = newProduct.getSub_category();
+            SubCategory subCategory = newProduct.getSubCategory();
             Category category = subCategory.getCategory();
 
             newProduct.setThumbnail(fileService.fileStorage(file, "produtos", category.getName(), subCategory.getName()));
         }
         if (multipleFiles != null) {
-            SubCategory subCategory = newProduct.getSub_category();
+            SubCategory subCategory = newProduct.getSubCategory();
             Category category = subCategory.getCategory();
 
             fileService.createAll(multipleFiles, newProduct, "produtos", category.getName(), subCategory.getName());

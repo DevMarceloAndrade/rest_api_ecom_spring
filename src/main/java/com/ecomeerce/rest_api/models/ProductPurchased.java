@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 @Entity
 public class ProductPurchased extends DataBaseModel{
 
-    @Column(nullable = false)
-    private String product_name;
+    @Column(name = "product_name", nullable = false)
+    private String productName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -28,8 +28,8 @@ public class ProductPurchased extends DataBaseModel{
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal price_at_purchase;
+    @Column(name = "price_at_purchase", nullable = false, precision = 10, scale = 2)
+    private BigDecimal priceAtPurchase;
 
     public ProductPurchased() {
     }

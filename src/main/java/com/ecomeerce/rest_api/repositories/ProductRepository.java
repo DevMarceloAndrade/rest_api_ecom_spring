@@ -17,7 +17,7 @@ public interface ProductRepository extends DataBaseRepository<Product>{
     @Query("SELECT p FROM Product p WHERE p.id = :id")
     Optional<ProductProjection> findByIdStandardType(@Param("id") UUID id);
 
-    @Query("SELECT p FROM Product p WHERE p.sub_category.id = :id")
+    @Query("SELECT p FROM Product p WHERE p.subCategory.id = :id")
     Optional<Page<ProductProjection>> findAllBySubCategory(@Param("id") UUID id, Pageable pageable);
 
 }

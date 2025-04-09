@@ -20,7 +20,7 @@ public class Product extends DataBaseModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sub_category_id", referencedColumnName = "id_", nullable = false)
     @JsonDeserialize(converter = SubCategoryIdToEntityConverter.class)
-    private SubCategory sub_category;
+    private SubCategory subCategory;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -32,7 +32,7 @@ public class Product extends DataBaseModel {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private Integer in_stock;
+    private Integer inStock;
 
     @Column(nullable = false)
     private Boolean featured;
@@ -47,7 +47,7 @@ public class Product extends DataBaseModel {
     private File thumbnail;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<File> files;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -56,11 +56,11 @@ public class Product extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ProductPromotion product_promotion;
+    private ProductPromotion productPromotion;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favorites", fetch = FetchType.LAZY)
-    private List<User> favorites_by_user;
+    private List<User> favoritesByUser;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)

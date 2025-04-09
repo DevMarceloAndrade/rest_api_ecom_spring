@@ -33,8 +33,8 @@ public class ProductCharacteristics extends DataBaseModel{
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal weight;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal insurance_value;
+    @Column(name = "insurance_value", nullable = false, precision = 10, scale = 2)
+    private BigDecimal insuranceValue;
 
     @Column(nullable = false)
     private Integer quantity;

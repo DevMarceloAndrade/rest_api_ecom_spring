@@ -22,17 +22,17 @@ public class CompanyInformation extends DataBaseModel {
     @Column(nullable = false, length = 14)
     private String phone;
 
-    @Column(nullable = false, length = 100)
-    private String phone_link;
+    @Column(name = "phone_link", nullable = false, length = 100)
+    private String phoneLink;
 
     @Column(nullable = false, length = 100)
     private String address;
 
-    @Column(nullable = false, length = 100)
-    private String address_link;
+    @Column(name = "address_link", nullable = false, length = 100)
+    private String addressLink;
 
-    @Column(nullable = false, length = 100)
-    private String instagram_link;
+    @Column(name = "instagram_link", nullable = false, length = 100)
+    private String instagramLink;
 
     public CompanyInformation() {
     }

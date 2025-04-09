@@ -29,8 +29,8 @@ public class FileService extends BaseService<File>{
         UploadFileResponseVO uploadFile = fileStorageService.uploadFile(multipartFile,subDirs);
 
         File file = new File(uploadFile.getFileName(),uploadFile.getFileType(),uploadFile.getFileSize());
-        file.setFile_downloadUri(uploadFile.getFileDownloadUri());
-        file.setFile_targetLocation(uploadFile.getFileTargetLocation());
+        file.setDownloadUri(uploadFile.getFileDownloadUri());
+        file.setTargetLocation(uploadFile.getFileTargetLocation());
 
         return file;
     }
@@ -43,7 +43,7 @@ public class FileService extends BaseService<File>{
 
         List<File> filesToCreate = Arrays.stream(multipartFiles).map(multipartFile->{
             File file = fileStorage(multipartFile,subDirs);
-            file.setProduct_id(product);
+            file.setProductId(product);
 
             return file;
         }).toList();
@@ -55,7 +55,7 @@ public class FileService extends BaseService<File>{
     public String delete(UUID id){
         super.checkEntityById(id);
         File fileToDelete = super.readById(id);
-        fileStorageService.deleteFile(fileToDelete.getFile_name(),fileToDelete.getFile_targetLocation());
+        fileStorageService.deleteFile(fileToDelete.getName(),fileToDelete.getTargetLocation());
         deleteById(id);
 
         return "File deleted";
@@ -65,7 +65,7 @@ public class FileService extends BaseService<File>{
         List<File> filesToDelete = dataBaseRepository.findAllById(ids);
         List<String> deletedResult = filesToDelete
                 .stream()
-                .map(file -> fileStorageService.deleteFile(file.getFile_name(),file.getFile_targetLocation()))
+                .map(file -> fileStorageService.deleteFile(file.getName(),file.getTargetLocation()))
                 .toList();
 
         dataBaseRepository.deleteAllById(ids);

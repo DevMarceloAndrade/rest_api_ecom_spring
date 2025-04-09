@@ -16,10 +16,10 @@ public class TagType extends DataBaseModel {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "tags",fetch = FetchType.LAZY)
-    private List<SubCategory> sub_category;
+    private List<SubCategory> subCategory;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "tag_type",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tagType",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Tag> tags;
 
     public TagType() {

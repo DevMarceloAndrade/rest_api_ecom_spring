@@ -15,11 +15,11 @@ import java.util.List;
 @Table(name="tab_user")
 public class User extends DataBaseModel {
 
-    @Column(length = 50, nullable = false)
-    private String first_name;
+    @Column(name = "first_name", length = 50, nullable = false)
+    private String firstName;
 
-    @Column(length = 20, nullable = false)
-    private String last_name;
+    @Column(name = "last_name", length = 20, nullable = false)
+    private String lastName;
 
     @Column(length = 11, nullable = false)
     private Integer phone;

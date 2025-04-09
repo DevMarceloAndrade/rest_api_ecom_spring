@@ -30,24 +30,24 @@ public class Purchase extends DataBaseModel {
     private String address;
 
     @Enumerated
-    @Column(length = 20)
-    private PaymentType payment_type;
+    @Column(name = "payment_type", length = 20)
+    private PaymentType paymentType;
 
     @Enumerated
-    @Column(length = 20)
-    private PaymentStatus payment_status;
+    @Column(name = "payment_status", length = 20)
+    private PaymentStatus paymentStatus;
 
-    @Column
-    private String payment_id_mp;
+    @Column(name = "payment_id_mp")
+    private String paymentIdMp;
 
-    @Column
-    private BigDecimal total_value_products;
+    @Column(name = "total_value_products")
+    private BigDecimal totalValueProducts;
 
     @Column
     private String status;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal shipping_cost;
+    @Column(name = "shipping_cost", nullable = false, precision = 10, scale = 2)
+    private BigDecimal shippingCost;
 
     public Address getAddress() {
         try {
@@ -67,12 +67,12 @@ public class Purchase extends DataBaseModel {
         }
     }
 
-    public void setPayment_type(String payment_type) {
-        this.payment_type = PaymentType.valueOf(payment_type.toUpperCase());
+    public void setPaymentType(String paymentType) {
+        this.paymentType = PaymentType.valueOf(paymentType.toUpperCase());
     }
 
-    public void setPayment_status(String payment_status) {
-        this.payment_status = PaymentStatus.valueOf(payment_status.toUpperCase());
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = PaymentStatus.valueOf(paymentStatus.toUpperCase());
     }
 
     public Purchase() {
