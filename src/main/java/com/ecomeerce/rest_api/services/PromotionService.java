@@ -7,9 +7,9 @@ import com.ecomeerce.rest_api.projection.PromotionProjection;
 import com.ecomeerce.rest_api.repositories.PromotionRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -29,8 +29,8 @@ public class PromotionService extends BaseService<Promotion>{
 
     }
 
-    public List<PromotionProjection> findAllStandardType(){
-        return promotionRepository.findAllStandardType()
+    public Page<PromotionProjection> findAllStandardType(Pageable pageable){
+        return promotionRepository.findAllStandardType(pageable)
                 .orElseThrow(EntityDoesNotExist::new);
     }
 }

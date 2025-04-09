@@ -34,7 +34,7 @@ public class CategoryController extends BaseController<Category> {
 
     @GetMapping("/sub-categories/")
     public ResponseEntity<Page<CategoryProjection>> getAllCategoryStandardType(
-            @RequestParam(value = "orderBy", required = false, defaultValue = "created_at") String orderBy,
+            @RequestParam(value = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
             @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage

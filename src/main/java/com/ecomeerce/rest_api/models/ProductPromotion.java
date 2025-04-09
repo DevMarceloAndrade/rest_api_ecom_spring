@@ -21,13 +21,13 @@ public class ProductPromotion extends DataBaseModel{
     @Column
     private String description;
 
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "promotion_id", referencedColumnName = "id_")
     @JsonDeserialize(converter = PromotionIdToEntityConverter.class)
     private Promotion promotion;
 
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", referencedColumnName = "id_")
     @JsonDeserialize(converter = ProductIdToEntityConverter.class)

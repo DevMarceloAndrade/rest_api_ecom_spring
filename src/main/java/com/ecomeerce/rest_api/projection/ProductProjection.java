@@ -9,6 +9,7 @@ import java.util.UUID;
 @JsonPropertyOrder({"id", "name", "description", "price", "in_stock", "featured", "promotion", "thumbnail"})
 public interface ProductProjection {
     UUID getId();
+    SubCategoryProjection getSub_category();
     String getName();
     String getDescription();
     BigDecimal getPrice();

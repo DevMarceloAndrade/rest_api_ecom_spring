@@ -10,8 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +25,7 @@ public class ProductPromotionController extends BaseController<ProductPromotion>
     @GetMapping("/promotion/{id}")
     public ResponseEntity<Page<ProductPromotionProjection>> readProductsPromotionByPromotionId(
             @PathVariable("id")UUID id,
-            @RequestParam(value = "orderBy", required = false, defaultValue = "created_at") String orderBy,
+            @RequestParam(value = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
             @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
             @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
             @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage

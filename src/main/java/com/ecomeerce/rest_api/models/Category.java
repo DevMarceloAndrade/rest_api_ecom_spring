@@ -19,7 +19,7 @@ public class Category extends DataBaseModel{
     @Column(nullable = false)
     private Integer position;
 
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<SubCategory> sub_categories;
 

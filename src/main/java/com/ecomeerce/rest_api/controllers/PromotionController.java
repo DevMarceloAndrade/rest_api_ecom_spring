@@ -8,6 +8,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,8 +58,14 @@ public class PromotionController {
     @Operation(summary = "Obtem promoção via ID", description = "Método para obter os dados de uma promoção.")
     @ApiResponse(responseCode = "201")
     @ApiResponse(responseCode = "500", description = "Erro no servidor.")
-    public ResponseEntity<List<PromotionProjection>> readAllPromotion(){
-        return ResponseEntity.status(HttpStatus.OK).body(promotionService.findAllStandardType());
+    public ResponseEntity<Page<PromotionProjection>> readAllPromotion(
+            @RequestParam(value = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
+            @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
+            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage
+    ){
+        Pageable pageable = PageRequest.of(page-1,perPage,Sort.by(orderType,orderBy));
+        return ResponseEntity.status(HttpStatus.OK).body(promotionService.findAllStandardType(pageable));
     }
 
     @PostMapping("/{id}/upload/thumbnail")

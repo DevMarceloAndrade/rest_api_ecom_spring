@@ -26,7 +26,7 @@ public class Promotion extends DataBaseModel{
     @OneToMany(mappedBy = "promotion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductPromotion> products_promotion;
 
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "thumbnail_id")
     @JsonDeserialize(converter = FileIdToFileConverter.class)
