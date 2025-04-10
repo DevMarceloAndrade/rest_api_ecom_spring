@@ -16,7 +16,7 @@ public class Category extends DataBaseModel{
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private Integer position;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

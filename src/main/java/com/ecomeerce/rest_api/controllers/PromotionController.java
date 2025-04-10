@@ -79,8 +79,8 @@ public class PromotionController {
         if(promotion.getThumbnail()!=null){
             fileService.delete(promotion.getThumbnail().getId());
         }
-
-        promotion.setThumbnail(fileService.fileStorage(file,"promotion",file.getName()));
+        System.out.println(file.getName());
+        promotion.setThumbnail(fileService.fileStorage(file,"promotion"));
         promotionService.updateById(id,promotion);
 
         return ResponseEntity.status(HttpStatus.OK).body(promotion);
