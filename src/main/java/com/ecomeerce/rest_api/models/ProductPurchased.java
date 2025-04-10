@@ -14,24 +14,24 @@ import java.math.BigDecimal;
 @Entity
 public class ProductPurchased extends DataBaseModel{
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", updatable = false)
     private String productName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "purchase_id", referencedColumnName = "id_" ,nullable = false)
+    @JoinColumn(name = "purchase_id", referencedColumnName = "id_" ,nullable = false, updatable = false)
     private Purchase purchase;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false, updatable = false)
     @JsonDeserialize(converter = ProductIdToEntityConverter.class)
     private Product product;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Integer quantity;
 
-    @Column(name = "price_at_purchase", nullable = false, precision = 10, scale = 2)
+    @Column(name = "price_at_purchase", nullable = false, precision = 10, scale = 2, updatable = false)
     private BigDecimal priceAtPurchase;
 
     public ProductPurchased() {
