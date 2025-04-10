@@ -1,6 +1,8 @@
 package com.ecomeerce.rest_api.models;
 
+import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 public class ProductPurchased extends DataBaseModel{
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "product_name")
     private String productName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -23,6 +25,7 @@ public class ProductPurchased extends DataBaseModel{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", referencedColumnName = "id_", nullable = false)
+    @JsonDeserialize(converter = ProductIdToEntityConverter.class)
     private Product product;
 
     @Column(nullable = false)
@@ -32,5 +35,11 @@ public class ProductPurchased extends DataBaseModel{
     private BigDecimal priceAtPurchase;
 
     public ProductPurchased() {
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.productName = product.getName();
+        this.priceAtPurchase = product.getPrice();
     }
 }
