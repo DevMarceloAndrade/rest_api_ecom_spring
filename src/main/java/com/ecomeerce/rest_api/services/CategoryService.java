@@ -5,6 +5,7 @@ import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.projection.CategoryProjection;
 import com.ecomeerce.rest_api.repositories.CategoryRepository;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class CategoryService extends BaseService<Category>{
     private final CategoryRepository categoryRepository;
 
+    @Autowired
     public CategoryService(CategoryRepository dataBaseRepository, Validator validator) {
         super(dataBaseRepository, validator);
         this.categoryRepository = dataBaseRepository;

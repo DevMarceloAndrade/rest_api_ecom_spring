@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.models;
 
 import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
+import com.ecomeerce.rest_api.component.PurchaseIdToEntityConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
@@ -20,6 +21,7 @@ public class ProductPurchased extends DataBaseModel{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "purchase_id", referencedColumnName = "id_" ,nullable = false, updatable = false)
+    @JsonDeserialize(converter = PurchaseIdToEntityConverter.class)
     private Purchase purchase;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

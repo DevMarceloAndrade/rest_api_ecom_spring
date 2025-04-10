@@ -1,6 +1,8 @@
 package com.ecomeerce.rest_api.models;
 
+import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,6 +34,7 @@ public class File extends DataBaseModel{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
+    @JsonDeserialize(converter = ProductIdToEntityConverter.class)
     private Product productId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

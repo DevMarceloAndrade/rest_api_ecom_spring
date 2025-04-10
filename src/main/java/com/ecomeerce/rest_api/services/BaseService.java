@@ -4,6 +4,7 @@ import com.ecomeerce.rest_api.exception.InvalidEntityException;
 import com.ecomeerce.rest_api.repositories.DataBaseRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ public class BaseService<T> {
     protected final DataBaseRepository<T> dataBaseRepository;
     private final Validator validator;
 
+    @Autowired
     public BaseService(DataBaseRepository<T> dataBaseRepository,Validator validator) {
         this.dataBaseRepository = dataBaseRepository;
         this.validator = validator;

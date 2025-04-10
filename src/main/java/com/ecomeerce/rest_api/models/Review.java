@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.models;
 
 import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
+import com.ecomeerce.rest_api.component.UserIdToEntityConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ public class Review extends DataBaseModel{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="user_id", referencedColumnName = "id_" ,nullable = false)
+    @JsonDeserialize(converter = UserIdToEntityConverter.class)
     private User user;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -1,11 +1,14 @@
 package com.ecomeerce.rest_api.models;
 
+import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
+import com.ecomeerce.rest_api.component.UserIdToEntityConverter;
 import com.ecomeerce.rest_api.enums.PaymentStatus;
 import com.ecomeerce.rest_api.enums.PaymentType;
 import com.ecomeerce.rest_api.exception.InvalidJsonFormatException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +23,7 @@ public class Purchase extends DataBaseModel {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id_", nullable = false)
+    @JsonDeserialize(converter = UserIdToEntityConverter.class)
     private User user;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
