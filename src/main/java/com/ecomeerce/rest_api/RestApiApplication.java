@@ -8,13 +8,13 @@ import pro.handler.file.config.FileStorageConfig;
 
 
 @EnableConfigurationProperties({
-		FileStorageConfig.class
+        FileStorageConfig.class
 })
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.ecomeerce.rest_api", "pro.handler.file"})
 public class RestApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RestApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RestApiApplication.class, args);
+    }
 }

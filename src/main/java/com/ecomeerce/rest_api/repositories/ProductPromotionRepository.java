@@ -1,7 +1,7 @@
 package com.ecomeerce.rest_api.repositories;
 
 import com.ecomeerce.rest_api.models.ProductPromotion;
-import com.ecomeerce.rest_api.projection.ProductPromotionProjection;
+import com.ecomeerce.rest_api.projections.ProductPromotionProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

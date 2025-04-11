@@ -3,7 +3,7 @@ package com.ecomeerce.rest_api.controllers;
 import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.models.Product;
 import com.ecomeerce.rest_api.models.SubCategory;
-import com.ecomeerce.rest_api.projection.ProductProjection;
+import com.ecomeerce.rest_api.projections.ProductProjection;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.ProductService;
 import com.ecomeerce.rest_api.services.SubCategoryService;

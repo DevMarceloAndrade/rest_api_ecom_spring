@@ -1,7 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.models.ProductPromotion;
-import com.ecomeerce.rest_api.projection.ProductPromotionProjection;
+import com.ecomeerce.rest_api.projections.ProductPromotionProjection;
 import com.ecomeerce.rest_api.services.ProductPromotionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

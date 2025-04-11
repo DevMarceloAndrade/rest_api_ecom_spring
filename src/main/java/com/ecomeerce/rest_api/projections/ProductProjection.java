@@ -1,4 +1,4 @@
-package com.ecomeerce.rest_api.projection;
+package com.ecomeerce.rest_api.projections;
 
 
 

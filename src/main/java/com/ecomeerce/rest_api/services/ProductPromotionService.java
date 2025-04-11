@@ -2,7 +2,7 @@ package com.ecomeerce.rest_api.services;
 
 import com.ecomeerce.rest_api.exception.EntityDoesNotExist;
 import com.ecomeerce.rest_api.models.ProductPromotion;
-import com.ecomeerce.rest_api.projection.ProductPromotionProjection;
+import com.ecomeerce.rest_api.projections.ProductPromotionProjection;
 import com.ecomeerce.rest_api.repositories.ProductPromotionRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;

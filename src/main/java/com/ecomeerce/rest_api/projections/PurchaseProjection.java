@@ -1,4 +1,4 @@
-package com.ecomeerce.rest_api.projection;
+package com.ecomeerce.rest_api.projections;
 
 import com.ecomeerce.rest_api.enums.PaymentStatus;
 import com.ecomeerce.rest_api.enums.PaymentType;

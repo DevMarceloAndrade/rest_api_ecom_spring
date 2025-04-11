@@ -1,7 +1,7 @@
 package com.ecomeerce.rest_api.controllers;
 
 import com.ecomeerce.rest_api.models.Promotion;
-import com.ecomeerce.rest_api.projection.PromotionProjection;
+import com.ecomeerce.rest_api.projections.PromotionProjection;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.PromotionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
