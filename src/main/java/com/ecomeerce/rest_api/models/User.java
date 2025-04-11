@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.ColumnDefault;
+
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class User extends DataBaseModel {
     @Column(name = "last_name", length = 20, nullable = false)
     private String lastName;
 
-    @Column(length = 11, nullable = false)
-    private Integer phone;
+    @Column(length = 15, nullable = false)
+    private String phone;
 
     @Column(nullable = false)
     private LocalDate birth;
@@ -35,7 +36,6 @@ public class User extends DataBaseModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @ColumnDefault("'USER'")
     private UserRole role;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -60,5 +60,6 @@ public class User extends DataBaseModel {
     private List<Purchase> purchases;
 
     public User() {
+        this.role = UserRole.USER;
     }
 }
