@@ -1,6 +1,7 @@
 package com.ecomeerce.rest_api.repositories;
 
 import com.ecomeerce.rest_api.models.User;
+import com.ecomeerce.rest_api.projections.UserProjection;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -8,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends DataBaseRepository<User> {
 
-    Optional<User> findByEmail(String email);
+    Optional<UserProjection> findByEmail(String email);
 }
