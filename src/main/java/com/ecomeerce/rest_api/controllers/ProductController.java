@@ -4,6 +4,7 @@ import com.ecomeerce.rest_api.models.Category;
 import com.ecomeerce.rest_api.models.Product;
 import com.ecomeerce.rest_api.models.SubCategory;
 import com.ecomeerce.rest_api.projections.ProductProjection;
+import com.ecomeerce.rest_api.projections.extension.ProductProjectionWithTags;
 import com.ecomeerce.rest_api.services.FileService;
 import com.ecomeerce.rest_api.services.ProductService;
 import com.ecomeerce.rest_api.services.SubCategoryService;
@@ -16,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -68,5 +71,17 @@ public class ProductController extends BaseController<Product>{
     ){
         Pageable pageable = PageRequest.of(page-1,perPage, Sort.by(orderType,orderBy));
         return ResponseEntity.status(HttpStatus.OK).body(productService.findAllBySubCategory(id,pageable));
+    }
+
+    @GetMapping("/tags")
+    public ResponseEntity<Page<ProductProjectionWithTags>> readAllByTags(
+            @RequestBody List<UUID> ids,
+            @RequestParam(value = "orderBy", required = false, defaultValue = "createdAt") String orderBy,
+            @RequestParam(value = "orderType", required = false, defaultValue = "ASC") Sort.Direction orderType,
+            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "perPage", required = false, defaultValue = "10") Integer perPage
+    ){
+        Pageable pageable = PageRequest.of(page-1,perPage, Sort.by(orderType,orderBy));
+        return ResponseEntity.status(HttpStatus.OK).body(productService.findAllByTags(ids,pageable));
     }
 }
