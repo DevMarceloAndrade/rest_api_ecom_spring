@@ -4,7 +4,9 @@ import com.ecomeerce.rest_api.models.Purchase;
 import com.ecomeerce.rest_api.repositories.PurchaseRepository;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PurchaseService extends BaseService<Purchase>{
     @Autowired
     public PurchaseService(PurchaseRepository dataBaseRepository, Validator validator) {

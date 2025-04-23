@@ -1,6 +1,5 @@
 package com.ecomeerce.rest_api.models;
 
-import com.ecomeerce.rest_api.component.ProductIdToEntityConverter;
 import com.ecomeerce.rest_api.component.UserIdToEntityConverter;
 import com.ecomeerce.rest_api.enums.PaymentStatus;
 import com.ecomeerce.rest_api.enums.PaymentType;
