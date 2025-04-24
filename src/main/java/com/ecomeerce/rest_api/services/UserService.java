@@ -1,4 +1,5 @@
 package com.ecomeerce.rest_api.services;
+import com.ecomeerce.rest_api.enums.UserRole;
 import com.ecomeerce.rest_api.exception.EntityDoesNotExist;
 import com.ecomeerce.rest_api.exception.InvalidEntityException;
 import com.ecomeerce.rest_api.models.User;
@@ -8,6 +9,8 @@ import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService extends BaseService<User>{
@@ -36,5 +39,9 @@ public class UserService extends BaseService<User>{
         }
 
         return user;
+    }
+
+    public Optional<UserProjection> findByRole(UserRole role){
+        return userRepository.findByRole(role);
     }
 }
