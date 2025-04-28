@@ -22,6 +22,9 @@ public interface ProductRepository extends DataBaseRepository<Product>{
     @Query("SELECT p FROM Product p WHERE p.subCategory.id = :id")
     Optional<Page<ProductProjection>> findAllBySubCategory(@Param("id") UUID id, Pageable pageable);
 
+    @Query("SELECT p FROM Product p WHERE p.ProductPromotion.id = :id")
+    Optional<Product> findByProductPromotionId(@Param("id") UUID id);
+
     @Query("SELECT p FROM Product p LEFT JOIN p.tags t WHERE t.id IN (:ids) GROUP BY p HAVING COUNT(DISTINCT t.id) = :size ")
     Optional<Page<ProductProjectionWithTags>> findAllByTags(@Param("tags") String ids, @Param("size") Integer size, Pageable pageable);
 

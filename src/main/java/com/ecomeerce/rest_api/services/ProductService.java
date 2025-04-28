@@ -44,4 +44,9 @@ public class ProductService extends BaseService<Product>{
         return productRepository.findAllByTags(idsIn , ids.size(), pageable)
                 .orElseThrow(EntityDoesNotExist::new);
     }
+
+    public Product findByProductPromotionId(UUID id){
+       return productRepository.findByProductPromotionId(id)
+                .orElseThrow(EntityDoesNotExist::new);
+    }
 }
